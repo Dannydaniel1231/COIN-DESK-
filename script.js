@@ -23,15 +23,16 @@ const timer= (code,date,rate,description)=>{
 const fetchData=async()=>{
 
 
-const fetch = await(await fetch("https://api.coindesk.com/v1/bpi/currentprice.json")).json();
-const currency=fetch.currency;
-console.log(currency.EUR);
-timer(date,currency.USD.code,currency.USD.rate,currency.USD.description);
-timer(date,currency.GBP.code,currency.GBP.rate,currency.GBP.description);
-timer(date,currency.EUR.code,currency.EUR.rate,currency.EUR.description);
+const fetchCoin= await(await fetch("https://api.coindesk.com/v1/bpi/currentprice.json")).json();
+console.log(fetchCoin.bpi);
+const bpi=fetchCoin.bpi;
+console.log(bpi)
+timer(date,bpi.USD.code,bpi.USD.rate,bpi.USD.description);
+timer(date,bpi.GBP.code,bpi.GBP.rate,bpi.GBP.description);
+timer(date,bpi.EUR.code,bpi.EUR.rate,bpi.EUR.description);
 
-pragraphy.innerHTML=`Disclaimer:${fetch.disclaimer}`+`<br>chartName:${fetch.chartName}`
+card.innerHTML=`Disclaimer:${fetchCoin.disclaimer}`+`<br>chartName:${fetchCoin.chartName}`
 
 }
 
-fetchData();
+fetchData()
